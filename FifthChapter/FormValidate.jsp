@@ -10,20 +10,28 @@
 	$(function(){
 		$(".required").each(function(){
 			$(this).parent().append("<strong style='color:red;'>*</strong>");
-		}).blur(function(){
+		}).bind("blur keyup focus",function(){
 			if($(this).is("#username")){
 				if($(this).val()==""||$(this).val().length<6){
-					$(this).parent().find(".onError").remove();
+					$(this).parent().find(".onRight,.onError").remove();
 					$(this).parent().append("<span class='onError'>invalid username!</span>");
+				}else{
+					$(this).parent().find(".onRight,.onError").remove();
+					$(this).parent().append("<span class='onRight'>valid username</span>");
 				}
 			}else{
-				if("\\"$(this).val()){
-					$(this).parent().find(".onError").remove();
-					$(this).parent().append("<span class='onError'>invalid username!</span>");
+				var reg = /\w+@\w+\.com$/;//chrome支持，firefox不支持
+				//alert(reg.test($(this).val()));
+				if($(this).val()==""||!(reg.test($(this).val()))){
+					$(this).parent().find(".onRight,.onError").remove();
+					$(this).parent().append("<span class='onError'>invalid email!</span>");
+				}else{
+					$(this).parent().find(".onRight,.onError").remove();
+					$(this).parent().append("<span class='onRight'>valid email</span>");
 				}
 			}
 		});
-	})
+	});
 </script>
 </head>
 <body>
