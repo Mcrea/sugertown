@@ -1,0 +1,1 @@
+简要描述了java8的新特性，引入了函数式编程。lambda,stream api,default interface method
